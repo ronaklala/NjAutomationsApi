@@ -2,6 +2,7 @@ const express = require("express");
 const ProductModel = require("../models/ProductModel");
 const OrderModel = require("../models/OrderModel");
 const UserModel = require("../models/UserModel");
+const { default: mongoose } = require("mongoose");
 
 exports.addNewProduct = (req, res) => {
   const product = new ProductModel(req.body);
@@ -80,4 +81,85 @@ exports.getUsers = (req, res) => {
   UserModel.find().then((doc) => {
     res.status(200).json(doc);
   });
+};
+
+exports.getOrders = (req, res) => {
+  OrderModel.aggregate([
+    {
+      $lookup: {
+        from: "Products",
+        let: { pid: { $toObjectId: "$pid" } },
+        pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$pid"] } } }],
+        as: "productDetails",
+      },
+    },
+  ]).then((doc) => {
+    res.status(200).json(doc);
+  });
+};
+
+exports.getSingleOrder = (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  const orders = OrderModel.aggregate([
+    {
+      $match: {
+        _id: id,
+      },
+    },
+    {
+      $lookup: {
+        from: "Products",
+        let: { pid: { $toObjectId: "$pid" } },
+        pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$pid"] } } }],
+        as: "productDetails",
+      },
+    },
+
+    {
+      $lookup: {
+        from: "Users",
+        let: { uid: { $toObjectId: "$uid" } },
+        pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$uid"] } } }],
+        as: "userDetails",
+      },
+    },
+  ]).then((doc) => {
+    res.status(200).json(doc);
+  });
+};
+
+exports.updateSingleOrder = (req, res) => {
+  OrderModel.findByIdAndUpdate(req.params.id, {
+    status: req.params.status,
+  })
+    .then((doc) => {
+      res.status(200).json({ message: "Upated Successfully" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal Server Error" });
+    });
+};
+
+exports.updateSingleProduct = (req, res) => {
+  const product = req.body;
+
+  ProductModel.findByIdAndUpdate(req.params.id, product)
+    .then((doc) => {
+      res.status(200).json({ message: "Product Updated" });
+    })
+    .catch((err) => {
+      res.status(400).json({ message: "Error" });
+    });
+};
+
+exports.deleteSingleProduct = (req, res) => {
+  const productId = req.params.id;
+
+  ProductModel.findOneAndDelete({ _id: productId })
+    .then(() => {
+      res.status(200).json({ message: "Product Deleted" });
+    })
+    .catch(() => {
+      res.status(404).json({ message: "Internal Server Error" });
+    });
 };
