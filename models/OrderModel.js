@@ -52,4 +52,6 @@ const OrderSchema = new mongoose.Schema(
   { timestamps: true } // createdAt, updatedAt timestamps will be taken care of by this automatically
 );
 
-module.exports = mongoose.model("Order", OrderSchema, "Orders");
+const OrderModel = mongoose.model("Order", OrderSchema, "Orders");
+
+module.exports = OrderModel;

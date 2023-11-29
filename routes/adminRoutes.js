@@ -10,6 +10,7 @@ const {
   updateSingleOrder,
   updateSingleProduct,
   deleteSingleProduct,
+  getDashboard,
 } = require("../controllers/AdminFunctions");
 
 const router = express.Router();
@@ -24,5 +25,6 @@ router.get("/getSingleOrder/:id", getSingleOrder);
 router.get("/updateOrderStatus/:id/:status", updateSingleOrder);
 router.post("/updateProduct/:id", updateSingleProduct);
 router.get("/deleteProduct/:id", deleteSingleProduct);
+router.get("/getDashboard", getDashboard);
 
 module.exports = router;

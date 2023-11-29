@@ -1,8 +1,8 @@
 const express = require("express");
 const ProductModel = require("../models/ProductModel");
-const OrderModel = require("../models/OrderModel");
 const UserModel = require("../models/UserModel");
 const { default: mongoose } = require("mongoose");
+const OrderModel = require("../models/OrderModel");
 
 exports.addNewProduct = (req, res) => {
   const product = new ProductModel(req.body);
@@ -162,4 +162,38 @@ exports.deleteSingleProduct = (req, res) => {
     .catch(() => {
       res.status(404).json({ message: "Internal Server Error" });
     });
+};
+
+exports.getDashboard = (req, res) => {
+  let dashboard = {
+    orders: null,
+    products: null,
+    users: null,
+    totalStock: null,
+  };
+
+  const getAllValues = () => {
+    OrderModel.countDocuments().then((count) => {
+      dashboard.orders = count;
+      ProductModel.countDocuments().then((count) => {
+        dashboard.products = count;
+        UserModel.countDocuments().then((count) => {
+          dashboard.users = count;
+          ProductModel.aggregate([
+            {
+              $group: {
+                _id: "",
+                totalStock: { $sum: "$qty" },
+              },
+            },
+          ]).then((count) => {
+            dashboard.totalStock = count;
+            res.status(200).json(dashboard);
+          });
+        });
+      });
+    });
+  };
+
+  getAllValues();
 };
