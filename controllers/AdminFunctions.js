@@ -10,11 +10,9 @@ exports.addNewProduct = (req, res) => {
   product
     .save()
     .then((doc) => {
-      console.log(doc);
       res.status(200).json({ success: "Product Added" });
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json({ error: "Internal Server Error" });
     });
 };

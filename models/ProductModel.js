@@ -28,6 +28,14 @@ const newProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    offerQty: {
+      type: Number,
+      required: true,
+    },
+    offerDisc: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true } // createdAt, updatedAt timestamps will be taken care of by this automatically
 );
