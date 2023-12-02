@@ -12,6 +12,5 @@ router.post("/register_uesr", registerNewUser);
 router.post("/login_user", loginUser);
 router.post("/checkout", paymentControl);
 router.get("/orders/:uid", getOrders);
-router.get("/mail", sendTestMail);
 
 module.exports = router;
