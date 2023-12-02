@@ -937,8 +937,8 @@ exports.sendOrderUpdateEmail = async (
       } else {
         console.log(info);
         resolve(info);
-        res.status(200).json({ message: "Upated Successfully" });
       }
     });
   });
+  res.status(200).json({ message: "Upated Successfully" });
 };
