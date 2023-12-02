@@ -940,5 +940,4 @@ exports.sendOrderUpdateEmail = async (
       }
     });
   });
-  res.status(200).json({ message: "Upated Successfully" });
 };

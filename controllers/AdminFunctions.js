@@ -147,6 +147,7 @@ exports.updateSingleOrder = (req, res) => {
             doc._id,
             req.params.status
           );
+          res.status(200).json({ message: "Upated Successfully" });
         });
       });
     })
