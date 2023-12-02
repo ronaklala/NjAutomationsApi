@@ -936,7 +936,8 @@ exports.sendOrderUpdateEmail = async (
         reject(err);
       } else {
         console.log(info);
-        resolve(info);
+
+        res.status(200).json({ message: "sent Successfully" });
       }
     });
   });

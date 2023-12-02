@@ -127,14 +127,14 @@ exports.getSingleOrder = (req, res) => {
   });
 };
 
-exports.updateSingleOrder = (req, res) => {
+exports.updateSingleOrder = async (req, res) => {
   OrderModel.findByIdAndUpdate(req.params.id, {
     status: req.params.status,
   })
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
-        UserModel.findById(doc.uid).then((user) => {
-          sendOrderUpdateEmail(
+        UserModel.findById(doc.uid).then(async (user) => {
+          await sendOrderUpdateEmail(
             user.email,
             doc.name,
             data.image,
@@ -147,7 +147,6 @@ exports.updateSingleOrder = (req, res) => {
             doc._id,
             req.params.status
           );
-          res.status(200).json({ message: "Upated Successfully" });
         });
       });
     })
