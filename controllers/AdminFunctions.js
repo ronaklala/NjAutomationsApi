@@ -134,7 +134,7 @@ exports.updateSingleOrder = async (req, res) => {
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
         UserModel.findById(doc.uid).then(async (user) => {
-          await sendOrderUpdateEmail(
+          let update = sendOrderUpdateEmail(
             user.email,
             doc.name,
             data.image,
@@ -147,6 +147,10 @@ exports.updateSingleOrder = async (req, res) => {
             doc._id,
             req.params.status
           );
+
+          if (update === 1) {
+            res.status(200).json({ message: "Updated" });
+          }
         });
       });
     })

@@ -934,10 +934,10 @@ exports.sendOrderUpdateEmail = async (
       if (err) {
         console.error(err);
         reject(err);
+        return 0;
       } else {
         console.log(info);
-
-        res.status(200).json({ message: "sent Successfully" });
+        return 1;
       }
     });
   });
