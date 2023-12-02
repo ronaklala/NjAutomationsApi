@@ -3,6 +3,7 @@ const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 const { default: mongoose } = require("mongoose");
 const OrderModel = require("../models/OrderModel");
+const { sendOrderUpdateEmail } = require("./MailController");
 
 exports.addNewProduct = (req, res) => {
   const product = new ProductModel(req.body);
@@ -131,7 +132,24 @@ exports.updateSingleOrder = (req, res) => {
     status: req.params.status,
   })
     .then((doc) => {
-      res.status(200).json({ message: "Upated Successfully" });
+      ProductModel.findById(doc.pid).then((data) => {
+        UserModel.findById(doc.uid).then((user) => {
+          sendOrderUpdateEmail(
+            user.email,
+            doc.name,
+            data.image,
+            doc.qty,
+            data.price,
+            doc.city,
+            doc.state,
+            doc.address,
+            data.name,
+            doc._id,
+            req.params.status
+          );
+          res.status(200).json({ message: "Upated Successfully" });
+        });
+      });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal Server Error" });
@@ -139,7 +157,7 @@ exports.updateSingleOrder = (req, res) => {
 };
 
 exports.updateSingleProduct = (req, res) => {
-  const product = req.body;
+  const product = doc;
 
   ProductModel.findByIdAndUpdate(req.params.id, product)
     .then((doc) => {

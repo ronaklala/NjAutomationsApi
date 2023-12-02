@@ -4,6 +4,7 @@ const Razorpay = require("razorpay");
 const OrderModel = require("../models/OrderModel");
 const ProductModel = require("../models/ProductModel");
 const mognoose = require("mongoose");
+const { sendOrderPlacedMail } = require("./MailController");
 
 exports.registerNewUser = (req, res) => {
   const user = new UserModel(req.body);
@@ -46,6 +47,17 @@ exports.paymentControl = (req, res) => {
     $inc: { qty: -req.body.qty },
   }).then((docs) => {
     order.save().then((doc) => {
+      sendOrderPlacedMail(
+        req.body.email,
+        req.body.name,
+        docs.image,
+        req.body.qty,
+        docs.price,
+        req.body.city,
+        req.body.state,
+        req.body.address,
+        docs.name
+      );
       res.status(200).json({ message: "Order Placed" });
     });
   });
