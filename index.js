@@ -5,6 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const adminRoutes = require("./routes/adminRoutes");
 const usesrRoutes = require("./routes/UserRoutes");
+const functions = require("firebase-functions");
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
@@ -26,3 +27,5 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/user", usesrRoutes);
 
 app.listen(PORT, (e) => {});
+
+exports.api = functions.https.onRequest(app);

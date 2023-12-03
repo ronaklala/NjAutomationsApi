@@ -148,6 +148,8 @@ exports.updateSingleOrder = async (req, res) => {
             req.params.status
           );
 
+          console.log(update);
+
           if (update === 1) {
             res.status(200).json({ message: "Updated" });
           }
