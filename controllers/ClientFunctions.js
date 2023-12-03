@@ -46,8 +46,8 @@ exports.paymentControl = (req, res) => {
   ProductModel.findByIdAndUpdate(req.body.pid, {
     $inc: { qty: -req.body.qty },
   }).then((docs) => {
-    order.save().then((doc) => {
-      sendOrderPlacedMail(
+    order.save().then(async (doc) => {
+      await sendOrderPlacedMail(
         req.body.email,
         req.body.name,
         docs.image,
@@ -58,7 +58,7 @@ exports.paymentControl = (req, res) => {
         req.body.address,
         docs.name
       );
-      res.status(200).json({ message: "Order Placed" });
+      await res.status(200).json({ message: "Order Placed" });
     });
   });
 };

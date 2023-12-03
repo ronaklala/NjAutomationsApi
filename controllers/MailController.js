@@ -1,7 +1,7 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 
-exports.sendOrderPlacedMail = (
+exports.sendOrderPlacedMail = async (
   email,
   names,
   image,
@@ -21,12 +21,16 @@ exports.sendOrderPlacedMail = (
     },
   });
 
-  transporter.sendMail(
-    {
-      from: "NJ Automations  <sales@njautomation.in>",
-      to: email,
-      subject: "Thanks For Shopping with NJ Automations",
-      html: `<!DOCTYPE html>
+  const mailData = {
+    from: {
+      name: `Nj Automatoins`,
+      address: "sales@njautomation.in",
+    },
+    to: email,
+    subject: `form message`,
+    text: "Done",
+    html: `
+      <!DOCTYPE html>
       <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
           <meta charset="utf-8"> <!-- utf-8 works for most cases -->
@@ -346,7 +350,36 @@ exports.sendOrderPlacedMail = (
                           <td style="padding: 0 2.5em; text-align: left;">
                               <div class="text">
                               
-                                  <h3>${names}, Thanks For Shopping with NJ Automations</h3>
+                                  <h3>${names}, There has been an update for your Order recently placed on Nj Automations</h3>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+                </td>
+                </tr><!-- end tr -->
+                 <tr>
+                <td valign="middle" class="hero bg_white" style="padding: 2em 0 2em 0;">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <td style="padding: 0 2.5em; text-align: left;">
+                              <div class="text">
+                              
+                                  <h3>Order ID: ${id}, is now ${status} </h3>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+                </td>
+                </tr><!-- end tr -->
+                
+                 <tr>
+                <td valign="middle" class="hero bg_white" style="padding: 2em 0 2em 0;">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <td style="padding: 0 2.5em; text-align: left;">
+                              <div class="text">
+                              
+                                  <h3>Product Details are Below </h3>
                               </div>
                           </td>
                       </tr>
@@ -441,15 +474,18 @@ exports.sendOrderPlacedMail = (
         </center>
       </body>
       </html>`,
-    },
-    function (er, info) {
-      if (er) {
-        console.log("Error" + er);
+  };
+
+  await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailData, (err, info) => {
+      if (err) {
+        reject(err);
       } else {
-        console.log("Mail Sent" + info);
+        resolve(info);
       }
-    }
-  );
+    });
+  });
 };
 
 exports.sendOrderUpdateEmail = async (
