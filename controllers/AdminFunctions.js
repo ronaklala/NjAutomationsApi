@@ -3,6 +3,7 @@ const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 const { default: mongoose } = require("mongoose");
 const OrderModel = require("../models/OrderModel");
+const Buffer = require("buffer");
 const {
   sendOrderUpdateEmail,
   sendOrderUpdateEmailWithTracking,
