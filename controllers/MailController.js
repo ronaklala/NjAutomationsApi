@@ -349,42 +349,15 @@ exports.sendOrderPlacedMail = async (
                         <td style="padding: 0 2.5em; text-align: left;">
                             <div class="text">
                             
-                                <h3>${names}, There has been an update for your Order recently placed on Nj Automations</h3>
+                                <h3>${names}, Thanks For Shopping with NJ Automations</h3>
                             </div>
                         </td>
                     </tr>
                 </table>
               </td>
               </tr><!-- end tr -->
-               <tr>
-              <td valign="middle" class="hero bg_white" style="padding: 2em 0 2em 0;">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td style="padding: 0 2.5em; text-align: left;">
-                            <div class="text">
-                            
-                                <h3>Order ID: ${id}, is now ${status} </h3>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-              </td>
-              </tr><!-- end tr -->
-              
-               <tr>
-              <td valign="middle" class="hero bg_white" style="padding: 2em 0 2em 0;">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td style="padding: 0 2.5em; text-align: left;">
-                            <div class="text">
-                            
-                                <h3>Product Details are Below </h3>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-              </td>
-              </tr><!-- end tr -->
+            
+            
               <tr>
                   <table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                       <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
