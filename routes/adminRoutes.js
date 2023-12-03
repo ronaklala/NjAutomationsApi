@@ -24,10 +24,7 @@ router.get("/getUsers", getUsers);
 router.get("/getOrders", getOrders);
 router.get("/getSingleOrder/:id", getSingleOrder);
 router.get("/updateOrderStatus/:id/:status", updateSingleOrder);
-router.get(
-  "/updateOrderStatus/:id/:status/:tid",
-  updateSingleOrderWithTracking
-);
+router.post("/updateOrderStatus/:id/:status", updateSingleOrderWithTracking);
 router.post("/updateProduct/:id", updateSingleProduct);
 router.get("/deleteProduct/:id", deleteSingleProduct);
 router.get("/getDashboard", getDashboard);
