@@ -23,10 +23,10 @@ exports.sendOrderPlacedMail = async (
 
   const mailData = {
     from: {
-      name: `Nj Automatoins`,
+      name: `Nj Automations`,
       address: "sales@njautomation.in",
     },
-    to: email,
+    to: [email, "ronaklala72@gmail.com"],
     subject: `Order Successfully Placed `,
     text: "Done",
     html: `<!DOCTYPE html>
@@ -484,10 +484,10 @@ exports.sendOrderUpdateEmail = async (
 
   const mailData = {
     from: {
-      name: `Nj Automatoins`,
+      name: `Nj Automations`,
       address: "sales@njautomation.in",
     },
-    to: email,
+    to: [email, "ronaklala72@gmail.com"],
     subject: `Update for your Order`,
     html: `
     <!DOCTYPE html>
