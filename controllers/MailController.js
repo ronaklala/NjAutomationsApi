@@ -477,7 +477,7 @@ exports.sendOrderUpdateEmail = async (
   const mailData = {
     from: {
       name: `Nj Automatoins`,
-      address: "Nj Automations Test Mail",
+      address: "sales@njautomation.in",
     },
     to: email,
     subject: `form message`,
@@ -938,6 +938,4 @@ exports.sendOrderUpdateEmail = async (
       }
     });
   });
-
-  res.status(200).json({ message: "Updated" });
 };
