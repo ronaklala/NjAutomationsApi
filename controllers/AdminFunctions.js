@@ -238,7 +238,7 @@ exports.updateSingleOrderWithTracking = async (req, res) => {
             data.name,
             doc._id,
             req.params.status,
-            Buffer.from(req.params.tid).toString("ascii")
+            new Buffer(req.params.tid, "base64")
           );
 
           await res.status(200).json({ message: "Updated" });
