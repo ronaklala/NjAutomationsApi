@@ -1310,8 +1310,8 @@ exports.sendOrderUpdateEmailWithTracking = async (
                             <p>Order Id: ${id}</p>
                             <p>Product Name: ${pname}</p>
                             <p>Ordered Quantity: ${qty}.</p>
-                            <p>Tracking ID: ${tid}</p>
-                            <p>You can track your Order from {trackingUrl}</p>
+                            <p>Tracking Link: ${tid}</p>
+                            <p>You can track your Order from <a href = "${tid}" target="_blank">Here</a></p>
                             <p>Delivery Address: ${address}, ${city}, ${state}.</p>
                             
                             <p>Order Total: ${price * qty}</p>
