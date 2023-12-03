@@ -14,8 +14,7 @@ const { default: mongoose } = require("mongoose");
 dotenv.config();
 
 mongoose.set("strictQuery", false);
-const DB =
-  "mongodb+srv://Warrior:Ronak3103@mydb.tgsvt.mongodb.net/NjAutomations?retryWrites=true&w=majority";
+const DB = process.env.MONGOURI;
 mongoose
   .connect(DB)
   .then(() => {
