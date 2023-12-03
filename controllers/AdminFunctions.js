@@ -226,7 +226,7 @@ exports.updateSingleOrderWithTracking = async (req, res) => {
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
         UserModel.findById(doc.uid).then(async (user) => {
-          let tracking = new Buffer(req.params.tid, "base64");
+          let tracking = new Buffer.from(req.params.tid).toString("ascii");
 
           await sendOrderUpdateEmailWithTracking(
             user.email,
