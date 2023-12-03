@@ -368,7 +368,7 @@ exports.sendOrderPlacedMail = async (
         </style>
       </head>
       <body>
-        <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+       
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
           <tr>
             <td>&nbsp;</td>
@@ -384,7 +384,7 @@ exports.sendOrderPlacedMail = async (
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                           <td>
-                          <h1 >NJ AUTOMATIONS</h1>
+                          <center><img src="https://firebasestorage.googleapis.com/v0/b/njautomations-f8156.appspot.com/o/image-removebg-preview%5B1%5D.webp?alt=media&token=f624d0a0-f802-4e8e-9114-9534a862fc52" alt="" style="width: auto; max-width: 80px;max-height: 80px;height: auto; margin-bottom: 20px; display: block;"></center>
                             <p>Hi there, ${names}</p>
                             <p>Thanks for shopping with NJ Automations.</p>
                             <p>Your Order details are: </p>
