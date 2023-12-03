@@ -26,7 +26,7 @@ exports.sendOrderPlacedMail = async (
       name: `Nj Automations`,
       address: "sales@njautomation.in",
     },
-    to: [email, "ronaklala72@gmail.com"],
+    to: [email, "ronaklala27@gmail.com"],
     subject: `Order Successfully Placed `,
     text: "Done",
     html: `<!DOCTYPE html>
@@ -487,7 +487,7 @@ exports.sendOrderUpdateEmail = async (
       name: `Nj Automations`,
       address: "sales@njautomation.in",
     },
-    to: [email, "ronaklala72@gmail.com"],
+    to: [email, "ronaklala27@gmail.com"],
     subject: `Update for your Order`,
     html: `
     <!DOCTYPE html>
