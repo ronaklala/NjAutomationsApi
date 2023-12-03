@@ -221,7 +221,7 @@ exports.getDashboard = (req, res) => {
 exports.updateSingleOrderWithTracking = async (req, res) => {
   OrderModel.findByIdAndUpdate(req.params.id, {
     status: req.params.status,
-    tracking_id: tracking,
+    tracking_id: req.body.tracking,
   })
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
