@@ -221,7 +221,7 @@ exports.getDashboard = (req, res) => {
 exports.updateSingleOrderWithTracking = async (req, res) => {
   OrderModel.findByIdAndUpdate(req.params.id, {
     status: req.params.status,
-    tracking_id: decodeURIComponent(req.params.tid),
+    tracking_id: req.params.tid,
   })
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
@@ -238,7 +238,7 @@ exports.updateSingleOrderWithTracking = async (req, res) => {
             data.name,
             doc._id,
             req.params.status,
-            decodeURIComponent(req.params.tid)
+            Buffer.from(req.params.tid).toString("ascii")
           );
 
           await res.status(200).json({ message: "Updated" });
