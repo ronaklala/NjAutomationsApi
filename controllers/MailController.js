@@ -933,10 +933,11 @@ exports.sendOrderUpdateEmail = async (
     transporter.sendMail(mailData, (err, info) => {
       if (err) {
         reject(err);
-        return 0;
       } else {
-        return 1;
+        resolve(info);
       }
     });
   });
+
+  res.status(200).json({ message: "Updated" });
 };

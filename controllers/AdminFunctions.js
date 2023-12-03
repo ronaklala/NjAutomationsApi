@@ -146,15 +146,7 @@ exports.updateSingleOrder = async (req, res) => {
             data.name,
             doc._id,
             req.params.status
-          )
-            .then((response) => {
-              console.log(response);
-              res.status(200).json({ message: "Updated" });
-            })
-            .catch((err) => {
-              console.log(err);
-              res.status(404).json({ message: "Internal Server Error" });
-            });
+          );
         });
       });
     })
