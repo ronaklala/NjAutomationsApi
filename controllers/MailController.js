@@ -27,7 +27,7 @@ exports.sendOrderPlacedMail = async (
       address: "sales@njautomation.in",
     },
     to: email,
-    subject: `form message`,
+    subject: `Order Successfully Placed `,
     text: "Done",
     html: `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -488,8 +488,7 @@ exports.sendOrderUpdateEmail = async (
       address: "sales@njautomation.in",
     },
     to: email,
-    subject: `form message`,
-    text: "Done",
+    subject: `Update for your Order`,
     html: `
     <!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
