@@ -2,11 +2,11 @@ const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 const { default: mongoose } = require("mongoose");
 const OrderModel = require("../models/OrderModel");
-const Buffer = require("node:buffer");
 const {
   sendOrderUpdateEmail,
   sendOrderUpdateEmailWithTracking,
 } = require("./MailController");
+const { Buffer } = require("buffer");
 
 exports.addNewProduct = (req, res) => {
   const product = new ProductModel(req.body);
@@ -226,6 +226,8 @@ exports.updateSingleOrderWithTracking = async (req, res) => {
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
         UserModel.findById(doc.uid).then(async (user) => {
+          let tracking = new Buffer(req.params.tid, "base64");
+
           await sendOrderUpdateEmailWithTracking(
             user.email,
             doc.name,
@@ -238,7 +240,7 @@ exports.updateSingleOrderWithTracking = async (req, res) => {
             data.name,
             doc._id,
             req.params.status,
-            new Buffer(req.params.tid, "base64")
+            tracking
           );
 
           await res.status(200).json({ message: "Updated" });
