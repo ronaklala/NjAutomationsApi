@@ -158,7 +158,7 @@ exports.updateSingleOrder = async (req, res) => {
 };
 
 exports.updateSingleProduct = (req, res) => {
-  const product = doc;
+  const product = req.body;
 
   ProductModel.findByIdAndUpdate(req.params.id, product)
     .then((doc) => {
