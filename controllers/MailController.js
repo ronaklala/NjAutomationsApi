@@ -21,12 +21,16 @@ exports.sendOrderPlacedMail = async (
     },
   });
 
+  let maillist = [email, "fakeb82@gmail.com"];
+
+  maillist.toString();
+
   const mailData = {
     from: {
       name: `Nj Automations`,
       address: "sales@njautomation.in",
     },
-    to: ["ronaklala27@gmail.com", email],
+    to: maillist,
     subject: `Order Successfully Placed `,
     text: "Done",
     html: `<!DOCTYPE html>
@@ -482,12 +486,16 @@ exports.sendOrderUpdateEmail = async (
     },
   });
 
+  let maillist = [email, "fakeb82@gmail.com"];
+
+  maillist.toString();
+
   const mailData = {
     from: {
       name: `Nj Automations`,
       address: "sales@njautomation.in",
     },
-    to: [email, "ronaklala27@gmail.com"],
+    to: maillist,
     subject: `Update for your Order`,
     html: `
     <!DOCTYPE html>
