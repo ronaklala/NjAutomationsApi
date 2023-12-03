@@ -11,6 +11,7 @@ const {
   updateSingleProduct,
   deleteSingleProduct,
   getDashboard,
+  updateSingleOrderWithTracking,
 } = require("../controllers/AdminFunctions");
 
 const router = express.Router();
@@ -23,6 +24,10 @@ router.get("/getUsers", getUsers);
 router.get("/getOrders", getOrders);
 router.get("/getSingleOrder/:id", getSingleOrder);
 router.get("/updateOrderStatus/:id/:status", updateSingleOrder);
+router.get(
+  "/updateOrderStatus/:id/:status/:tid",
+  updateSingleOrderWithTracking
+);
 router.post("/updateProduct/:id", updateSingleProduct);
 router.get("/deleteProduct/:id", deleteSingleProduct);
 router.get("/getDashboard", getDashboard);

@@ -48,6 +48,10 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    tracking_id: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true } // createdAt, updatedAt timestamps will be taken care of by this automatically
 );

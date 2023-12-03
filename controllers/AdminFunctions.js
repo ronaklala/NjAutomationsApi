@@ -3,7 +3,10 @@ const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 const { default: mongoose } = require("mongoose");
 const OrderModel = require("../models/OrderModel");
-const { sendOrderUpdateEmail } = require("./MailController");
+const {
+  sendOrderUpdateEmail,
+  sendOrderUpdateEmailWithTracking,
+} = require("./MailController");
 
 exports.addNewProduct = (req, res) => {
   const product = new ProductModel(req.body);
@@ -213,4 +216,36 @@ exports.getDashboard = (req, res) => {
   };
 
   getAllValues();
+};
+
+exports.updateSingleOrderWithTracking = async (req, res) => {
+  OrderModel.findByIdAndUpdate(req.params.id, {
+    status: req.params.status,
+    tracking_id: req.params.tid,
+  })
+    .then((doc) => {
+      ProductModel.findById(doc.pid).then((data) => {
+        UserModel.findById(doc.uid).then(async (user) => {
+          await sendOrderUpdateEmailWithTracking(
+            user.email,
+            doc.name,
+            data.image,
+            doc.qty,
+            data.price,
+            doc.city,
+            doc.state,
+            doc.address,
+            data.name,
+            doc._id,
+            req.params.status,
+            req.params.tid
+          );
+
+          await res.status(200).json({ message: "Updated" });
+        });
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal Server Error" });
+    });
 };
