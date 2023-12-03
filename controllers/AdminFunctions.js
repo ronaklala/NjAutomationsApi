@@ -134,7 +134,7 @@ exports.updateSingleOrder = async (req, res) => {
     .then((doc) => {
       ProductModel.findById(doc.pid).then((data) => {
         UserModel.findById(doc.uid).then(async (user) => {
-          let update = sendOrderUpdateEmail(
+          sendOrderUpdateEmail(
             user.email,
             doc.name,
             data.image,
@@ -146,13 +146,15 @@ exports.updateSingleOrder = async (req, res) => {
             data.name,
             doc._id,
             req.params.status
-          );
-
-          console.log(update);
-
-          if (update === 1) {
-            res.status(200).json({ message: "Updated" });
-          }
+          )
+            .then((response) => {
+              console.log(response);
+              res.status(200).json({ message: "Updated" });
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(404).json({ message: "Internal Server Error" });
+            });
         });
       });
     })

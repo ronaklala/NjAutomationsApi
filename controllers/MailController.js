@@ -932,11 +932,9 @@ exports.sendOrderUpdateEmail = async (
     // send mail
     transporter.sendMail(mailData, (err, info) => {
       if (err) {
-        console.error(err);
         reject(err);
         return 0;
       } else {
-        console.log(info);
         return 1;
       }
     });
