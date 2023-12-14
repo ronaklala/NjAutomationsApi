@@ -36,6 +36,10 @@ const newProductSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    detail: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true } // createdAt, updatedAt timestamps will be taken care of by this automatically
 );
