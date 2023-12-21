@@ -478,7 +478,7 @@ exports.sendOrderUpdateEmail = async (
     },
   });
 
-  let maillist = [email, "fakeb82@gmail.com"];
+  let maillist = [email, "orders@njautomation.in"];
 
   maillist.toString();
 
