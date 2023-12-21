@@ -21,7 +21,7 @@ exports.sendOrderPlacedMail = async (
     },
   });
 
-  let maillist = [email, "fakeb82@gmail.com"];
+  let maillist = [email, "orders@njautomation.in"];
 
   maillist.toString();
 
@@ -938,7 +938,7 @@ exports.sendOrderUpdateEmailWithTracking = async (
     },
   });
 
-  let maillist = [email, "fakeb82@gmail.com"];
+  let maillist = [email, "orders@njautomation.in"];
 
   maillist.toString();
 
